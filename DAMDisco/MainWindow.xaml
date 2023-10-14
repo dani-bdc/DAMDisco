@@ -1,0 +1,63 @@
+﻿<Window x:Class="DAMDisco.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DAMDisco"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="349" Width="677" ResizeMode="NoResize">
+    <Grid>
+        <Button x:Name="btCapacity" Content="Enter capacity" HorizontalAlignment="Left" Margin="28,29,0,0" VerticalAlignment="Top" Height="32" Width="92" Click="btCapacity_Click"/>
+        <Label x:Name="lblSelectedCapacity" Content="Capacity not selected" HorizontalAlignment="Left" Margin="147,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.5,-0.884"/>
+        <Button x:Name="btAddPerson" Content="New Person" HorizontalAlignment="Left" Margin="320,32,0,0" VerticalAlignment="Top" Height="32" Width="92" IsEnabled="False" Click="btAddPerson_Click"/>
+        <Label Content="Queue" HorizontalAlignment="Left" Margin="36,89,0,0" VerticalAlignment="Top"/>
+        <Label Content="Disco" HorizontalAlignment="Left" Margin="253,84,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.564,0.062"/>
+        <ListBox x:Name="lbQueue" Margin="33,120,485,43" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding QueueMaxTime}">
+                            <TextBlock.Triggers>
+                                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="{Binding QueueMaxDurationTime}" Storyboard.TargetProperty="Opacity" To="0" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </TextBlock.Triggers>
+
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="lbDisco" Margin="253,120,265,43">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontWeight="Bold" Text="{Binding Name}">
+                            <TextBlock.Triggers>
+                                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="{Binding DiscoDurationTime}" Storyboard.TargetProperty="Opacity" To="0" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </TextBlock.Triggers>
+                        </TextBlock>
+                        <TextBlock Text="{Binding DiscoTime}">
+
+
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="History" HorizontalAlignment="Left" Margin="465,84,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.564,0.062"/>
+        <ListBox x:Name="lbHistory"  Margin="465,120,42,43"/>
+
+    </Grid>
+</Window>
